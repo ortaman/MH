@@ -1,0 +1,179 @@
+* {  margin: 0;  padding: 0; }
+
+body {
+    background:lightblue;
+    font-family:Arial, Helvetica, sans-serif;
+    font-size: 1em;
+    text-shadow: .08em .08em 0 rgba(216, 216, 216, 0.50);
+}
+
+p {
+    text-align:justify
+}
+
+h1, h2, h3, h4, h5, h6 {
+    text-align:center;
+}
+
+h1 {
+    font: oblique bold 2em cursive;
+}
+
+.container {
+    background: rgba(170, 170, 170, 0.8);
+    border: 1px solid #1682ba;
+        -webkit-border-radius: 0.3em 0.3em 0.3em 0.3em;
+        -moz-border-radius: 0.3em 0.3em 0.3em 0.3em;
+    border-radius: 0.3em 0.3em 0.3em 0.3em;
+    margin: 0 auto;
+    margin-bottom: 0.5%;
+    width:85%;
+}
+.wrapper{
+    padding: 2.2em 5%;
+}
+
+/********************** stilos extra para la cabecera *********************/
+header {
+    margin: 0 5%;
+}
+
+header .logo {
+    display: inline-block;
+    padding: 2% 0px 2% 0px;
+    width: 100% ;
+}
+
+/*********************************** Estilos para la NAVEGACION ***********************************/
+nav {
+    /*border: solid 0.1em #4F7DA6;*/
+    display: inline-block;
+    font-family: Helvetica, Arial;
+    width: 20%;
+}
+
+nav ul {
+    list-style: none;
+    margin: 0em;
+    padding: 0em;
+}
+
+nav ul ul {
+    display: none;
+}
+
+nav ul li {
+    cursor: pointer;
+    /*margin-top: 10px;*/
+}
+
+nav > ul > li > a {
+    background: #eee;
+    background: -webkit-linear-gradient( #36aae7, #1fa0e4 );
+    background: -moz-linear-gradient( #36aae7, #1fa0e4 );
+    background: -o-linear-gradient( #36aae7, #1fa0e4 );
+    background: -ms-linear-gradient( #36aae7, #1fa0e4 );
+    background: linear-gradient( #36aae7, #1fa0e4 );
+
+    display: block;
+    color: #eee;
+    font-size: 0.95em;
+    font-weight: bold;
+    
+    border: 1px solid #1682ba;
+        -webkit-border-radius: 0.3em 0.3em 0.3em 0.3em;
+        -moz-border-radius: 0.3em 0.3em 0.3em 0.3em;
+    border-radius: 0.3em 0.3em 0.3em 0.3em;
+    box-shadow: inset 0 1px 0 rgba( 255, 255, 255, 0.15 );
+    
+    margin-top: 5%;
+    padding: 8% 2% 8% 20%;
+    position: relative;
+    
+    text-decoration: none;
+    text-shadow: 0 1px 1px rgba( 0, 0, 0, 0.35 );
+}
+
+nav > ul > li > a::after {
+    content: '';
+    display: block;
+    height: 5px;
+    
+    position: absolute;
+    right: 20px;
+    top: 12px;
+    
+    border-top: 2px solid #eeeeee;
+    border-left: 2px solid #eeeeee;
+
+    -webkit-transform: rotate(-135deg);
+    -moz-transform: rotate(-135deg);
+    -ms-transform: rotate(-135deg);
+    -o-transform: rotate(-135deg);
+    transform: rotate(-135deg);
+    
+    width: 5px;
+}
+
+nav > ul > li:first-child {               
+    margin-top: -5%;
+} 
+/*
+nav > ul > li:last-child a:after {
+    display: none;
+} 
+*/
+nav > ul > li > a:hover {
+    color: #e0e561;
+    background: #1fa0e4;
+    background: -webkit-linear-gradient(#1fa0e4, #1992d1);
+    background: -moz-linear-gradient(#1fa0e4, #1992d1);
+    background: -o-linear-gradient(#1fa0e4, #1992d1);
+    background: -ms-linear-gradient(#1fa0e4, #1992d1);
+    background: linear-gradient(#1fa0e4, #1992d1);
+}
+
+nav > ul > li > a:active {
+    color: #f5ff00;
+}
+
+nav ul ul li a {
+    display: block;
+    background: #49505a;
+    box-shadow: inset 0 1px 0 rgba( 255, 255, 255, 0.1 );
+    color: #eee;
+    font-size: 0.8em;
+
+    border-bottom: 1px solid #32373e;
+    border-left: 1px solid #32373e;
+    border-right: 1px solid #32373e;
+        -webkit-border-radius: 0.3em 0.3em 0.3em 0.3em;
+        -moz-border-radius: 0.3em 0.3em 0.3em 0.3em;
+    border-radius: 0.3em 0.3em 0.3em 0.3em;
+
+    padding: 4% 0 4% 24%;
+    
+    margin: 0.1em 0.1em ;
+    text-decoration: none;
+    text-shadow: none;
+}
+
+nav ul ul li > a:hover {
+    background: #424852;
+    color: #e0e561;
+}
+
+nav ul ul li > a:active {
+    color: #f5ff00;
+}
+
+/********************** Estilos para imagen a la derecha de  NAVEGACION *****************************/
+
+.right_of_nav {
+    border: solid 0.1em #4F7DA6;
+    display:inline-block;
+    margin-left: 5%;
+   /* min-height: 380px;*/
+    vertical-align: top;
+    width: 74%;
+}

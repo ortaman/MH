@@ -1,0 +1,97 @@
+{% load staticfiles %}
+
+<!DOCTYPE html>
+
+<html lang = "es">
+
+<head>
+    <meta charset="utf-8" />
+    <title>{% block titulo %}   {% endblock %}</title>
+    
+    <!-- Agregar el context_instance = RequestContext(request)  a la vista para obtener el STATIC_URL-->
+    <link rel='stylesheet' type='text/css' href="{% static 'css/normalize.css' %}"/>  
+    <link rel='stylesheet' type='text/css' href="{% static 'mechatronics/css/base.css' %}"/>
+
+    <script type="text/javascript" src="{% static 'js/jquery-1.11.3.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'mechatronics/js/accordion.js' %}"></script>
+    
+    {% block js_css %} {% endblock %}
+</head>
+
+<body>
+    <!-- Estilo para la cabecera -->
+    <div class='container'>
+        <header>
+            <!-- row that include the logo, and the inputs text and button -->
+            <div class='logo'>
+                    <h1> Sistema Administrativo "MECHATRONICS HOUSE" </h1>
+            </div>
+        </header> 
+    </div>
+    
+    <!-- Estilo para para el menu y el bloque que se encuentra a la deracha del mismo -->
+    <div class='container'>
+        <div class='wrapper'>
+            <nav>
+                <ul>
+                    <li> <a href='#'> Capturar </a>
+                        <ul>
+                            <li> <a href='/administrativo/addequipos'> Equipos </a> </li>
+                            <li> <a href='/administrativo/addclientes'> Clientes </a> </li>
+                            <li> <a href='/administrativo/addempleados'> Empleados </a> </li>
+                            <li> <a href='/administrativo/addpagos'> Pagos </a> </li>
+                        </ul>
+                    </li>
+                    <li> <a href='#'> Actualizar </a>
+                        <ul>
+                            <li> <a href='/administrativo/searchequipos'> Equipos </a> </li>
+                            <li> <a href='/administrativo/searchclientes'> Clientes </a> </li>
+                            <li> <a href='/administrativo/searchempleados'> Empleados </a> </li>
+                            <li> <a href='/administrativo/searchpagos'> Pagos </a> </li>
+                        </ul>                        
+                    </li>                    
+                    <li> <a href='#'> Reportes </a>
+                        <ul>
+                            <li> <a href='/administrativo/facturas'> Facturas </a> </li>
+                            <li> <a href='/administrativo/utilidad'> Utilidad </a> </li>
+                        </ul>
+                    </li>
+                    <li> <a href='#'> Ayuda </a>
+                        <ul>
+                            <li> <a id='popup_acercaDe'> Acerca de... </a> </li>
+                        </ul>
+                    </li>
+                    <li> <a href='#'> Salir </a> 
+                        <ul> 
+                            <li> <a href='/administrativo/salir'> Confirmar </a> </li>
+                        </ul>
+                    </li>
+                </ul>
+            </nav> 
+            
+            <!-- Estilo para el bloque del lado derecho de la pagina -->
+            <div class="right_of_nav">   
+            {% block right_of_nav %}    {% endblock %} 
+            </div> 
+
+            <!-- Estilo para el bloque debajo de la pagina -->
+            {% block bottom_of_nav %}    {% endblock %}  
+
+        </div>          
+    </div>
+
+    <!-- Estilo para el pie de pagina -->
+    <footer class="container">
+        <div class="bloque_footer">     <!-- css no definido --> 
+            <h6>
+                <br> Copyright © Software Nakom
+                <br> nakom@hotmail.com 
+                <br> <br>
+            </h6>
+        </div>
+    </footer>
+
+{% block popup %} {% endblock %}
+
+</body>
+</html>
