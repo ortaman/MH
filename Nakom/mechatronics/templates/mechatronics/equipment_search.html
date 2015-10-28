@@ -1,0 +1,97 @@
+
+{% extends 'mechatronics/base.html' %}
+{% load staticfiles %}
+
+{% block titulo %} Administracion {% endblock %}
+
+{% block js_css %}
+	<link rel='stylesheet' type='text/css' href="{% static 'mechatronics/css/base_search.css' %}"/>	
+
+	<script>
+	$(function() {
+		$( '#datepicker-1, #datepicker-2' ).datepicker();
+		$( '#datepicker-1, #datepicker-2' ).datepicker( "option", "showAnim", 'show' );
+		$( '#datepicker-1, #datepicker-2' ).datepicker( "option", "dateFormat", "dd/mm/yy" );
+		$( '#datepicker-1' ).datepicker( "setDate", '{{date_start|escape}}' );
+		$( '#datepicker-2' ).datepicker( "setDate", '{{date_end|escape}}' );
+	});
+   </script> 
+{% endblock %}
+
+{% block right_of_nav %}
+	<fieldset>
+	    <legend> Búsqueda de Equipos: </legend>
+
+		<form action='search' method="GET">	
+			<fieldset class='por-fecha'>
+				<legend> <h6> Por ingreso: </h6> </legend>
+				<label> <h5> Fecha Inicial: </h5> </label> 
+				<input id='datepicker-1' type='text' name='textQuery1' value=''> 
+				<label> <h5> Fecha Final: </h5> </label>
+				<input id='datepicker-2' type='text' name='textQuery2' value=''>
+			</fieldset>
+
+			<fieldset class='por-estatus'>
+				<legend> <h6> Por Estatus: </h6> </legend>
+				<select name='textQuery3'>
+					<option value=""> ----- </option>
+					<option value="almacenado"> Almacenado </option>
+					<option value="diagnosticado"> Diagnosticado </option>
+					<option value="reparado"> Reparado </option>
+					<option value="entregado"> Entregado </option>
+					<option value="irreparable"> Irreparable </option>
+				</select>
+				<input type='submit' name='buscar' value='Buscar' class='btn-buscar'>
+			</fieldset>
+		</form>	 
+
+		{% if result %}
+			<form action='search' method="POST">			{% csrf_token %}
+				<table id='tabla-search'>
+					<thead>
+						<tr>
+							<th colspan ='9'> 
+								Resultados por fecha del "{{date_start|escape}}" al "{{date_end|escape}}" y 
+								estatus "{{status|escape}}"
+							</tr>
+						<tr>
+							<th>
+								<a id='js_popup' href='#'>
+									<img src="{% static 'mechatronics/img/delete.png' %}" height=13px width=13px >
+								</a>
+								<img class ='icon' src="{% static 'mechatronics/img/modify.png' %}" height=13px width=13px >
+							</th> 
+							<th> Tipo    </th> <th> Cliente </th> <th> Ingreso  </th>  <th> Entrega  </th>
+							<th> Estatus </th> <th> Costo   </th> <th> Empleado </th>
+						</tr>
+					</thead>
+					<tbody>
+						{% for equipment in result %}
+							<tr>
+								<td>
+									<input type="checkbox" name="delete" value='{{equipment.id|escape}}'>
+									<a href='/administrativo/editequipo{{equipment.id|escape}}/'>
+										<img class ='icon' src="{% static 'mechatronics/img/modify.png' %}"
+											 height=13px width=13px >
+									</a>
+									<a href='/administrativo/facturaequipo{{equipment.id|escape}}/'></a>  
+								</td>
+								<td> {{ equipment.tipo|escape }} </td>
+								<td> {{ equipment.cliente|escape }} </td>
+								<td> {{ equipment.ingreso|escape }} </td>
+								<td> {{ equipment.entrega|escape }} </td>			
+								<td> {{ equipment.estatus|escape }} </td>
+								<td> {{ equipment.total|escape }} </td>
+								<td> {{ equipment.empleado|escape }} </td>
+							</tr>
+						{% endfor %}
+					</tbody>
+				</table>
+			</form>
+		{% else %}	
+			<p> No hay resultado en la busqueda </p>
+		{% endif %}
+		
+	</fieldset>	
+
+{% endblock %}

@@ -1,0 +1,113 @@
+#datepicker-1, #datepicker-2 {
+	height: 1.25em;
+	width: 5.5em;
+}
+
+fieldset { 
+	margin: 1% 2%; 
+	padding: 2% 2%; 
+	width:92% ;
+}
+
+legend { 
+	font-size:1.1em;  
+	font-weight:bold; 
+}
+/******************* Estilos para los fieldsets ******************/
+.por-fecha{
+	display: inline-block;
+	margin: 0 0% 2.6% 1.25%;
+	padding: 0 0 0 2.5%;
+	vertical-align: top;
+	width: 52%;
+}
+.por-fecha label{
+	/*border: solid 1px;*/
+	margin-top: 0.4em;
+	margin-bottom: 1.5em;
+	text-align: right;
+	width: 15%;
+}
+.por-fecha input{
+	vertical-align: top;
+}
+
+.por-estatus,
+.por-nombre {
+	display: inline-block;
+	margin: 0 0 2.5% 2.5%;
+	padding: 0em 2.5%;
+	vertical-align: top;
+	width: 32%;
+}
+.por-estatus select,
+.por-nombre select {
+	margin-bottom: 0.5em;
+	width: 52%;
+}	
+
+/*******************  Estilo para los botones en la busqueda ***********************/
+input.btn-buscar,
+input.btn-cerrar {
+	margin-left: 5%;
+	height: 1.8em; 
+	width: 6em;
+}
+/*******************  Estilo para la tablas en la busqueda ***********************/
+.icon{
+	margin-left: 1em;
+}
+
+#tabla-search {	
+	border:1px solid #aaa;
+	margin:0.5em auto;
+	padding:0px;
+	width: 95%;
+}
+#tabla-search  thead tr:first-child{
+	color:#111;
+	font-family:Arial;
+	font-weight:bold;
+	text-align:center;
+}
+#tabla-search  thead tr:first-child th{
+	font-size: .80em;
+	padding: 0.5em 0em;
+}
+#tabla-search  thead tr:last-child{
+	background:-o-linear-gradient( bottom, #a1bed1 5%, #64A0F1 100% );	
+	background:-webkit-gradient( linear, left top,left bottom, color-stop(0.05, #64A0F1), color-stop(1, #64A0F1) );
+	background:-moz-linear-gradient( center top, #ACD7E5 5%, #64A0F1 100% );
+	background: -o-linear-gradient( top, #a1bed1, #64A0F1 );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr="#a1bed1", endColorstr="#6984ad" );	
+	background-color:#a1bed1;
+
+	border:1px solid #888;
+	border-width:1px 0px 1px 0px;
+	
+	color:#111;
+	font-family:Arial;
+	font-size:0.80em;
+	font-weight:bold;
+	text-align:center;
+}
+#tabla-search  thead tr:last-child th{
+	margin:0.5em 0em;
+	padding: 0.4em 0em ;
+}
+
+#tabla-search tbody tr td{
+	border: 1px solid #aaa;
+	color:#222;
+	font-family:Arial;
+	font-size:0.75em;
+	margin:0em 0em;
+	padding:0.2em 0.5em;
+	text-align:center;
+}
+#tabla-search tbody tr:nth-child(odd) { 
+	background-color:#eee; 
+}
+#tabla-search tbody tr:nth-child(even) { 
+	background-color:#d7eaf2; 
+}

@@ -1,0 +1,100 @@
+{% extends 'mechatronics/base.html' %}     
+
+{% block titulo %} Administración {% endblock %}
+
+{% block js_css %}  
+    <style>
+        fieldset { margin: 1% 2%; padding: 0.25em 1em;}
+        legend { font-size:1.2em;  font-weight:bold; }
+        table {  width: 100%; }     
+        td, th { /*border: 0.1em solid #4F7DA6;*/
+            border-bottom:1px solid #D3D3D9;  
+            text-align:left;  
+            padding:0.25em 0.5em 1.25em 0.5em; 
+        }
+        label[for='id_servicios'] {
+            vertical-align: top;      
+            width: 17%;
+        }
+        textarea {
+            height: 5em;
+            width: 70%;
+        }
+        select{
+            width: 53%;   
+        }
+        input.btn-buscar{      
+            height: 1.7em; 
+            width: 40%;
+        }
+        input.btn-guardar{
+            margin-left: 2em;      
+            width: 55%;
+        }
+
+        #id_servicios{
+            height: 80%; 
+            width: 80%;
+        }
+    </style>
+
+    <script>
+        $(document).ready(function() {
+            document.getElementById("id_servicios").setAttribute("size", "5");
+        })
+
+        $(function() {
+            $('#id_entrega').datepicker();
+            $('#id_entrega').datepicker("option", "showAnim", "show");
+            $('#id_entrega').datepicker("option", "dateFormat", "dd/mm/yy");
+            $('#id_entrega').datepicker("setDate", {{ formE.entrega.value }});
+        });
+   </script> 
+{% endblock %}
+
+{% block right_of_nav %}
+    <form action='add' method='POST'> {% csrf_token %}   
+        <fieldset>
+            <legend> Agregar Equipos: </legend>
+            <table>
+              <tr>
+                <td> {{ formE.folio.errors }} <label for="id_folio"> Folio: </label> {{ formE.folio }} </td>
+                <td> </td>      
+                <td>    
+                    <fieldset>
+                        <input type="text" name='textQuery' value="{{ query|escape }}"  placeholder='Folio'> 
+                        <input type="submit" name="submitQuery" value="Buscar" class='btn-buscar'>
+                    </fieldset> 
+                </td>
+              </tr>
+              <tr>
+                <td> {{ formE.tipo.errors }} <label for="id_tipo"> Tipo: </label> {{ formE.tipo }} </td>
+                <td> {{ formE.marca.errors }} <label for='id_marca'> Marca: </label> {{ formE.marca }} </td>        
+                <td> {{ formE.modelo.errors }} <label for='id_modelo'> Modelo: </label> {{ formE.modelo }} </td>
+              </tr>
+              <tr>
+                <td>{{ formE.cliente.errors }} <label for='id_cliente'> Cliente: </label> {{ formE.cliente }}</td>
+                <td> {{ formE.estatus.errors }} <label for="id_estatus"> Estatus: </label> {{ formE.estatus }} </td>
+                <td> {{ formE.empleado.errors }} <label for="empleado"> Empleado: </label> {{ formE.empleado }} </td>   
+              </tr>
+              <tr>
+                <td colspan="2" rowspan="2"> 
+                    {{ formE.servicios.errors }} <label for='id_servicios'> Servicios: </label> {{formE.servicios}} 
+                </td>
+                <td> {{ formE.entrega.errors }} <label for='id_entrega'> Entrega: </label> {{ formE.entrega }} </td>
+              </tr>
+              <tr>
+                <td> {{ formE.total.errors }} <label for="total"> Total: </label> {{ formE.total }} </td>
+              </tr>
+
+              <tr>
+                <td> </td>
+                <td> {{ formE.registro.errors }} <label for="total"> Total: </label> {{ formE.registro }} </td>
+                <td> {{ formE.empleado.errors }} <input type='submit' name ='submitEquipo' value='Guardar' class='btn-guardar'/> </td>
+                <td> </td>
+              </tr>
+            </table>
+
+        </fieldset>
+    </form>
+{% endblock %}

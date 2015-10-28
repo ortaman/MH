@@ -6,14 +6,17 @@
 
 <head>
     <meta charset="utf-8" />
-    <title>{% block titulo %}   {% endblock %}</title>
+    <title>{% block titulo %} {% endblock %}</title>
     
     <!-- Agregar el context_instance = RequestContext(request)  a la vista para obtener el STATIC_URL-->
     <link rel='stylesheet' type='text/css' href="{% static 'css/normalize.css' %}"/>  
     <link rel='stylesheet' type='text/css' href="{% static 'mechatronics/css/base.css' %}"/>
+    <link rel='stylesheet' type='text/css' href="{% static 'mechatronics/css/base_forms.css' %}"/>
+    <link rel='stylesheet' type='text/css' href="{% static 'mechatronics/css/datepicker.css' %}"/>
 
     <script type="text/javascript" src="{% static 'js/jquery-1.11.3.min.js' %}"></script>
     <script type="text/javascript" src="{% static 'mechatronics/js/accordion.js' %}"></script>
+    <script type="text/javascript" src="{% static 'mechatronics/js/datepicker.js' %}"></script>
     
     {% block js_css %} {% endblock %}
 </head>
@@ -36,24 +39,24 @@
                 <ul>
                     <li> <a href='#'> Capturar </a>
                         <ul>
-                            <li> <a href='/administrativo/addequipos'> Equipos </a> </li>
-                            <li> <a href='/administrativo/addclientes'> Clientes </a> </li>
-                            <li> <a href='/administrativo/addempleados'> Empleados </a> </li>
-                            <li> <a href='/administrativo/addpagos'> Pagos </a> </li>
+                            <li> <a href='/administrative/equipment/add'> Equipos </a> </li>
+                            <li> <a href='/administrative/client/search'> Clientes </a> </li>
+                            <li> <a href='/administrative/empleados/search'> Empleados </a> </li>
+                            <li> <a href='/administrative/pagos/search'> Pagos </a> </li>
                         </ul>
                     </li>
                     <li> <a href='#'> Actualizar </a>
                         <ul>
-                            <li> <a href='/administrativo/searchequipos'> Equipos </a> </li>
-                            <li> <a href='/administrativo/searchclientes'> Clientes </a> </li>
-                            <li> <a href='/administrativo/searchempleados'> Empleados </a> </li>
-                            <li> <a href='/administrativo/searchpagos'> Pagos </a> </li>
-                        </ul>                        
-                    </li>                    
+                            <li> <a href='/administrative/equipment/search'> Equipos </a> </li>
+                            <li> <a href='/administrative/client/search'> Clientes </a> </li>
+                            <li> <a href='/administrative/empleados/search'> Empleados </a> </li>
+                            <li> <a href='/administrative/pagos/search'> Pagos </a> </li>
+                        </ul>
+                    </li>
                     <li> <a href='#'> Reportes </a>
                         <ul>
-                            <li> <a href='/administrativo/facturas'> Facturas </a> </li>
-                            <li> <a href='/administrativo/utilidad'> Utilidad </a> </li>
+                            <li> <a href='/administrative/facturas'> Facturas </a> </li>
+                            <li> <a href='/administrative/utilidad'> Utilidad </a> </li>
                         </ul>
                     </li>
                     <li> <a href='#'> Ayuda </a>
@@ -63,7 +66,7 @@
                     </li>
                     <li> <a href='#'> Salir </a> 
                         <ul> 
-                            <li> <a href='/administrativo/salir'> Confirmar </a> </li>
+                            <li> <a href='/administrative/salir'> Confirmar </a> </li>
                         </ul>
                     </li>
                 </ul>
@@ -71,11 +74,11 @@
             
             <!-- Estilo para el bloque del lado derecho de la pagina -->
             <div class="right_of_nav">   
-            {% block right_of_nav %}    {% endblock %} 
+            {% block right_of_nav %} {% endblock %} 
             </div> 
 
             <!-- Estilo para el bloque debajo de la pagina -->
-            {% block bottom_of_nav %}    {% endblock %}  
+            {% block bottom_of_nav %} {% endblock %}  
 
         </div>          
     </div>
