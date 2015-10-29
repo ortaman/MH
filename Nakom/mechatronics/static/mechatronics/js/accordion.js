@@ -17,4 +17,4 @@ $(document).ready(function () {
             element.siblings('li').removeClass('open');       // Remueve la clase 'open' de todos los hermanos de 'li' del objeto elemento
         }
     });   
-});
+ });      

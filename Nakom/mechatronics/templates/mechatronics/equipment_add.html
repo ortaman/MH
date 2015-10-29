@@ -56,7 +56,7 @@
 
     <fieldset>
         <legend> Agregar Equipos: </legend>
-        <form action='add' method='POST'> {% csrf_token %}  
+        <form action='.' method='POST'> {% csrf_token %}  
           <table>
             <tr>
               <td> {{ formEquip.folio.errors }} <label for="id_folio"> Folio: </label> {{ formEquip.folio }}  </td>  
@@ -65,7 +65,7 @@
                 <fieldset>
                     <input type="text" name="folioQuery" value="{{ query|escape }}"  placeholder="Folio">
                     <input type="submit" name="submitFolio" value="Buscar" class="btn-buscar">
-                    <p class='errors'> {{ error }} </p>
+                    <p class='error'> {{ error }} </p>
                 </fieldset>
               </td>
             <tr>

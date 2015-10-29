@@ -22,7 +22,7 @@
 	<fieldset>
 	    <legend> Búsqueda de Equipos: </legend>
 
-		<form action='search' method="GET">	
+		<form action='.' method="GET">	
 			<fieldset class='por-fecha'>
 				<legend> <h6> Por ingreso: </h6> </legend>
 				<label> <h5> Fecha Inicial: </h5> </label> 
@@ -46,7 +46,7 @@
 		</form>	 
 
 		{% if result %}
-			<form action='search' method="POST">			{% csrf_token %}
+		    <form action='../delete' method="POST"> {% csrf_token %}
 				<table id='tabla-search'>
 					<thead>
 						<tr>
@@ -70,11 +70,10 @@
 							<tr>
 								<td>
 									<input type="checkbox" name="delete" value='{{equipment.id|escape}}'>
-									<a href='/administrativo/editequipo{{equipment.id|escape}}/'>
+									<a href='/administrative/equipment/edit/{{equipment.id|escape}}'>
 										<img class ='icon' src="{% static 'mechatronics/img/modify.png' %}"
 											 height=13px width=13px >
 									</a>
-									<a href='/administrativo/facturaequipo{{equipment.id|escape}}/'></a>  
 								</td>
 								<td> {{ equipment.tipo|escape }} </td>
 								<td> {{ equipment.cliente|escape }} </td>
@@ -87,9 +86,26 @@
 						{% endfor %}
 					</tbody>
 				</table>
+				<!-- pop up para confirmacion de eliminacion de elementos -->
+				<div class="overlay-container1">
+				    <div class="window-container1">
+							<fieldset>
+							  	<legend> Se eliminarán los registros seleccionados </legend>
+							  	<div>
+							  		<input type='text' name='textQuery1' value='{{date_start|escape}}'> 
+									<input type='text' name='textQuery2' value='{{date_end|escape}}'>
+									<input type='text' name='textQuery3' value='{{status|escape}}'>
+								</div>
+								<input type='submit' class="btn-buscar" name ='submitDelete' value='Confirmar'/>
+								<span class="close"> Cancelar </span>
+					
+							</fieldset>
+				    </div>
+				</div>
+				<!-- End de popup inicialmente oculto -->
 			</form>
 		{% else %}	
-			<p> No hay resultado en la busqueda </p>
+			<p class='error'> No hay resultado en la busqueda </p>
 		{% endif %}
 		
 	</fieldset>	

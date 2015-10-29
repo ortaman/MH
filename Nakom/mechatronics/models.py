@@ -78,7 +78,7 @@ class Equipo(models.Model):
         ('entregado', 'Entregado'),
         ('inreparable', 'Irreparable'),
     )
-    folio = models.CharField(max_length=6, help_text='Número de Folio')
+    folio = models.CharField(max_length=6, unique=True, help_text='Número de Folio')
 
     tipo = models.CharField(max_length=22, help_text='Información del equipo')
     marca = models.CharField(max_length=22, help_text='Marca del equipo')

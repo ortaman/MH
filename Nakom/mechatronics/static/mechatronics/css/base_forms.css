@@ -93,7 +93,7 @@ ul.errorlist {           /* non field error list container */
     text-align: center;
 }
 
-.errors { 
+.error { 
     color: red;
     font-size: 0.6em;
     margin: 0em;
