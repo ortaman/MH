@@ -1,3 +1,5 @@
+# encoding:utf-8
+
 from datetime import datetime, date
 
 from django.shortcuts import render, render_to_response, get_object_or_404
@@ -14,23 +16,41 @@ def index(request):
 
 
 def equipment_add(request):
-    template_name = 'mechatronics/equipment_add.html'
-
+    error = str()
     if request.method == 'POST':
-        form_equipment = FormEquipo(request.POST)
 
-        if form_equipment.is_valid():
-            form_equipment.save()
+        # Add equipment
+        if 'submitEquip' in request.POST:
+            form_equipment = FormEquipo(request.POST)
 
-            url = '/administrative/equipment/add'
-            return HttpResponseRedirect(url)
+            if form_equipment.is_valid():
+                form_equipment.save()
 
-    else:
-        form_equipment = FormEquipo()
-        print 'GGGGEEEEEETTTT'
+                url = '/administrative/equipment/add'
+                return HttpResponseRedirect(url)
+
+        # search equipment by folio
+        elif 'submitFolio' in request.POST:
+            folio = request.POST.get('folioQuery', '')
+
+            if folio:
+                try:
+                    result = Equipo.objects.get(folio=folio)
+                    form_equipment = FormEquipo(instance=result)
+
+                except Equipo.DoesNotExist as exception:
+                    error = "Folio: %s dosen't exist" % folio
+                    form_equipment = FormEquipo()
+
+            else:
+                form_equipment = FormEquipo()
+    
+    # when load the web page use 'GET' method
+    elif request.method == 'GET':
+            form_equipment = FormEquipo()
 
     template_name = 'mechatronics/equipment_add.html'
-    context = {'formE': form_equipment}
+    context = {'formEquip': form_equipment, 'error': error}
     return render(request, template_name, context)
 
 

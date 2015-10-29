@@ -47,54 +47,54 @@
             $('#id_entrega').datepicker();
             $('#id_entrega').datepicker("option", "showAnim", "show");
             $('#id_entrega').datepicker("option", "dateFormat", "dd/mm/yy");
-            $('#id_entrega').datepicker("setDate", {{ formE.entrega.value }});
+            $('#id_entrega').datepicker("setDate", {{ formEquip.entrega.value }});
         });
    </script> 
 {% endblock %}
 
 {% block right_of_nav %}
-    <form action='add' method='POST'> {% csrf_token %}   
-        <fieldset>
-            <legend> Agregar Equipos: </legend>
-            <table>
-              <tr>
-                <td> {{ formE.folio.errors }} <label for="id_folio"> Folio: </label> {{ formE.folio }} </td>
-                <td> </td>      
-                <td>    
-                    <fieldset>
-                        <input type="text" name='textQuery' value="{{ query|escape }}"  placeholder='Folio'> 
-                        <input type="submit" name="submitQuery" value="Buscar" class='btn-buscar'>
-                    </fieldset> 
-                </td>
-              </tr>
-              <tr>
-                <td> {{ formE.tipo.errors }} <label for="id_tipo"> Tipo: </label> {{ formE.tipo }} </td>
-                <td> {{ formE.marca.errors }} <label for='id_marca'> Marca: </label> {{ formE.marca }} </td>        
-                <td> {{ formE.modelo.errors }} <label for='id_modelo'> Modelo: </label> {{ formE.modelo }} </td>
-              </tr>
-              <tr>
-                <td>{{ formE.cliente.errors }} <label for='id_cliente'> Cliente: </label> {{ formE.cliente }}</td>
-                <td> {{ formE.estatus.errors }} <label for="id_estatus"> Estatus: </label> {{ formE.estatus }} </td>
-                <td> {{ formE.empleado.errors }} <label for="empleado"> Empleado: </label> {{ formE.empleado }} </td>   
-              </tr>
-              <tr>
-                <td colspan="2" rowspan="2"> 
-                    {{ formE.servicios.errors }} <label for='id_servicios'> Servicios: </label> {{formE.servicios}} 
-                </td>
-                <td> {{ formE.entrega.errors }} <label for='id_entrega'> Entrega: </label> {{ formE.entrega }} </td>
-              </tr>
-              <tr>
-                <td> {{ formE.total.errors }} <label for="total"> Total: </label> {{ formE.total }} </td>
-              </tr>
 
-              <tr>
-                <td> </td>
-                <td> {{ formE.registro.errors }} <label for="total"> Total: </label> {{ formE.registro }} </td>
-                <td> {{ formE.empleado.errors }} <input type='submit' name ='submitEquipo' value='Guardar' class='btn-guardar'/> </td>
-                <td> </td>
-              </tr>
-            </table>
+    <fieldset>
+        <legend> Agregar Equipos: </legend>
+        <form action='add' method='POST'> {% csrf_token %}  
+          <table>
+            <tr>
+              <td> {{ formEquip.folio.errors }} <label for="id_folio"> Folio: </label> {{ formEquip.folio }}  </td>  
+              <td> </td>
+              <td>           
+                <fieldset>
+                    <input type="text" name="folioQuery" value="{{ query|escape }}"  placeholder="Folio">
+                    <input type="submit" name="submitFolio" value="Buscar" class="btn-buscar">
+                    <p class='errors'> {{ error }} </p>
+                </fieldset>
+              </td>
+            <tr>
+              <td> {{ formEquip.tipo.errors }} <label for="id_tipo"> Tipo: </label> {{ formEquip.tipo }} </td>
+              <td> {{ formEquip.marca.errors }} <label for='id_marca'> Marca: </label> {{ formEquip.marca }} </td>        
+              <td> {{ formEquip.modelo.errors }} <label for='id_modelo'> Modelo: </label> {{ formEquip.modelo }} </td>
+            </tr>
+            <tr>
+              <td>{{ formEquip.cliente.errors }} <label for='id_cliente'> Cliente: </label> {{ formEquip.cliente }}</td>
+              <td> {{ formEquip.estatus.errors }} <label for="id_estatus"> Estatus: </label> {{ formEquip.estatus }} </td>
+              <td> {{ formEquip.empleado.errors }} <label for="empleado"> Empleado: </label> {{ formEquip.empleado }} </td>   
+            </tr>
+            <tr>
+              <td colspan="2" rowspan="2"> 
+                  {{ formEquip.servicios.errors }} <label for='id_servicios'> Servicios: </label> {{formEquip.servicios}} 
+              </td>
+              <td> {{ formEquip.entrega.errors }} <label for='id_entrega'> Entrega: </label> {{ formEquip.entrega }} </td>
+            </tr>
+            <tr>
+              <td> {{ formEquip.total.errors }} <label for="total"> Total: </label> {{ formEquip.total }} </td>
+            </tr>
+            <tr>
+              <td> </td>
+              <td> {{ formEquip.registro.errors }} <label for="total"> Total: </label> {{ formEquip.registro }} </td>
+              <td> {{ formEquip.empleado.errors }} <input type='submit' name ='submitEquip' value='Guardar' class='btn-guardar'/> </td>
+              <td> </td>
+            </tr>
+          </table>
+        </form>
+    </fieldset>
 
-        </fieldset>
-    </form>
 {% endblock %}

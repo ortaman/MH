@@ -92,3 +92,10 @@ ul.errorlist {           /* non field error list container */
     padding: 4px 5px;
     text-align: center;
 }
+
+.errors { 
+    color: red;
+    font-size: 0.6em;
+    margin: 0em;
+    padding: 0em 0em;
+}
