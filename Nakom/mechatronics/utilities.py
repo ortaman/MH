@@ -1,4 +1,3 @@
-
 from datetime import datetime
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 

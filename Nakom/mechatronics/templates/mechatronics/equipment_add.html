@@ -94,6 +94,16 @@
               <td> </td>
             </tr>
           </table>
+
+          <!-- guarda variables para poder volver s hacer la consulta de la informacóm 
+          que ya estaba desplegada en la página search-->
+          <div style="display:none;" >
+            <input type='text' name='page' value='{{ page }}'> 
+            <input type='text' name='queryDate1' value='{{ query.date1|escape }}'> 
+            <input type='text' name='queryDate2' value='{{ query.date2|escape }}'>
+            <input type='text' name='queryStatus' value='{{ query.status|escape }}'>
+          </div>
+        
         </form>
     </fieldset>
 

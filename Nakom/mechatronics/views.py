@@ -110,7 +110,13 @@ def equipment_edit(request, id_equipment):
         equipment = Equipo.objects.get(id=id_equipment)
         form_equipment = FormEquipo(instance=equipment)
 
-        context = {'formEquip': form_equipment}
+        p = request.GET.get('page', '')
+        q = {}
+        q['date1'] = request.GET.get('qdate1', '')
+        q['date2'] = request.GET.get('qdate2', '')
+        q['status'] = request.GET.get('qstatus', '')
+
+        context = {'formEquip': form_equipment, 'query': q , 'page':p}
         template_name = 'mechatronics/equipment_add.html'
 
         return render(request, template_name, context)
@@ -122,7 +128,15 @@ def equipment_edit(request, id_equipment):
 
         if form_equipment.is_valid():
             form_equipment.save()
+
+            p = request.POST.get('page', '')
+            q1 = request.POST.get('queryDate1', '')
+            q2 = request.POST.get('queryDate2', '')
+            q3 = request.POST.get('queryStatus', '')
+            print 'fsdfsdfsdfxzxcxc', p, q1, q2, q3
+
             url = '/administrative/equipment/search/'
+            url += '?page=%s&qdate1=%s&qdate2=%s&qstatus=%s' % (p, q1, q2, q3)
 
         else:
             print 'Formulario no valido'
