@@ -26,14 +26,14 @@
 			<fieldset class='por-fecha'>
 				<legend> <h6> Por ingreso: </h6> </legend>
 				<label> <h5> Fecha Inicial: </h5> </label> 
-				<input id='datepicker-1' type='text' name='textQuery1' value=''> 
+				<input id='datepicker-1' type='text' name='queryDate1' value=''> 
 				<label> <h5> Fecha Final: </h5> </label>
-				<input id='datepicker-2' type='text' name='textQuery2' value=''>
+				<input id='datepicker-2' type='text' name='queryDate2' value=''>
 			</fieldset>
 
 			<fieldset class='por-estatus'>
 				<legend> <h6> Por Estatus: </h6> </legend>
-				<select name='textQuery3'>
+				<select name='queryStatus'>
 					<option value=""> ----- </option>
 					<option value="almacenado"> Almacenado </option>
 					<option value="diagnosticado"> Diagnosticado </option>
@@ -41,18 +41,18 @@
 					<option value="entregado"> Entregado </option>
 					<option value="irreparable"> Irreparable </option>
 				</select>
-				<input type='submit' name='buscar' value='Buscar' class='btn-buscar'>
+				<input type='submit' name='submitSearch' value='Buscar' class='btn-buscar'>
 			</fieldset>
 		</form>	 
 
-		{% if result %}
+		{% if equipList %}
 		    <form action='../delete' method="POST"> {% csrf_token %}
 				<table id='tabla-search'>
 					<thead>
 						<tr>
 							<th colspan ='9'> 
-								Resultados por fecha del "{{date_start|escape}}" al "{{date_end|escape}}" y 
-								estatus "{{status|escape}}"
+								Resultados por fecha del "{{ query.date1|escape }}" al "{{ query.date2|escape }}" y 
+								estatus "{{ query.status|escape }}"
 							</tr>
 						<tr>
 							<th>
@@ -66,35 +66,55 @@
 						</tr>
 					</thead>
 					<tbody>
-						{% for equipment in result %}
+						{% for equip in equipList %}
 							<tr>
 								<td>
-									<input type="checkbox" name="delete" value='{{equipment.id|escape}}'>
-									<a href='/administrative/equipment/edit/{{equipment.id|escape}}'>
+									<input type="checkbox" name="delete" value='{{equip.id|escape}}'>
+									<a href='/administrative/equipment/edit/{{equip.id|escape}}'>
 										<img class ='icon' src="{% static 'mechatronics/img/modify.png' %}"
 											 height=13px width=13px >
 									</a>
 								</td>
-								<td> {{ equipment.tipo|escape }} </td>
-								<td> {{ equipment.cliente|escape }} </td>
-								<td> {{ equipment.ingreso|escape }} </td>
-								<td> {{ equipment.entrega|escape }} </td>			
-								<td> {{ equipment.estatus|escape }} </td>
-								<td> {{ equipment.total|escape }} </td>
-								<td> {{ equipment.empleado|escape }} </td>
+								<td> {{ equip.tipo|escape }} </td>
+								<td> {{ equip.cliente|escape }} </td>
+								<td> {{ equip.ingreso|escape }} </td>
+								<td> {{ equip.entrega|escape }} </td>			
+								<td> {{ equip.estatus|escape }} </td>
+								<td> {{ equip.total|escape }} </td>
+								<td> {{ equip.empleado|escape }} </td>
 							</tr>
 						{% endfor %}
 					</tbody>
 				</table>
-				<!-- pop up para confirmacion de eliminacion de elementos -->
+
+				<div class="pagination">
+				    <span class="step-links">
+				        {% if equipList.has_previous %}
+				            <a href="?page={{ equipList.previous_page_number }}&qdate1={{ query.date1|escape }}&qdate2={{ query.date2|escape }}&qstatus={{ query.status }}">previous</a>
+				        {% endif %}
+
+				        <span class="current">
+				            Page {{ equipList.number }} of {{ equipList.paginator.num_pages }}.
+				        </span>
+
+				        {% if equipList.has_next %}
+				            <a href="?page={{ equipList.next_page_number }}&qdate1={{ query.date1|escape }}&qdate2={{ query.date2|escape }}&qstatus={{ query.status }}">next</a>
+				        {% endif %}
+				    </span>
+				</div>
+
+				<!-- pop up para confirmacion de eliminacion de elementos y guarda variables para poder 
+			    volver s hacer la consulta de la informacóm que ya estaba desplegada en la página search-->
 				<div class="overlay-container1">
 				    <div class="window-container1">
 							<fieldset>
 							  	<legend> Se eliminarán los registros seleccionados </legend>
-							  	<div>
-							  		<input type='text' name='textQuery1' value='{{date_start|escape}}'> 
-									<input type='text' name='textQuery2' value='{{date_end|escape}}'>
-									<input type='text' name='textQuery3' value='{{status|escape}}'>
+							  	<div style="display:none;" >request.GET.get('page')
+				                    <input type='text' name='page' value='{{ equipList.number }}'> 
+							  		<input type='text' name='queryDate1' value=request.GET.get('page')> 
+							  		<input type='text' name='queryDate1' value='{{ query.date1|escape }}'> 
+									<input type='text' name='queryDate2' value='{{ query.date2|escape }}'>
+									<input type='text' name='queryStatus' value='{{ query.status|escape }}'>
 								</div>
 								<input type='submit' class="btn-buscar" name ='submitDelete' value='Confirmar'/>
 								<span class="close"> Cancelar </span>
