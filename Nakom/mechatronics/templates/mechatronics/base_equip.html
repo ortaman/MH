@@ -1,19 +1,19 @@
-{% extends 'mechatronics/base.html' %}     
+{% extends 'mechatronics/base.html' %}
 
-{% block titulo %} Administración {% endblock %}
+{% block title_1 %} Administración {% endblock %}
 
-{% block js_css %}  
+{% block js_css %}
     <style>
         fieldset { margin: 1% 2%; padding: 0.25em 1em;}
         legend { font-size:1.2em;  font-weight:bold; }
-        table {  width: 100%; }     
+        table {  width: 100%; }
         td, th { /*border: 0.1em solid #4F7DA6;*/
-            border-bottom:1px solid #D3D3D9;  
-            text-align:left;  
-            padding:0.25em 0.5em 1.25em 0.5em; 
+            border-bottom:1px solid #D3D3D9;
+            text-align:left;
+            padding:0.25em 0.5em 1.25em 0.5em;
         }
         label[for='id_servicios'] {
-            vertical-align: top;      
+            vertical-align: top;
             width: 17%;
         }
         textarea {
@@ -21,19 +21,19 @@
             width: 70%;
         }
         select{
-            width: 53%;   
+            width: 53%;
         }
-        input.btn-buscar{      
-            height: 1.7em; 
+        input.btn-buscar{
+            height: 1.7em;
             width: 40%;
         }
         input.btn-guardar{
-            margin-left: 2em;      
+            margin-left: 2em;
             width: 55%;
         }
 
         #id_servicios{
-            height: 80%; 
+            height: 80%;
             width: 80%;
         }
     </style>
@@ -49,38 +49,40 @@
             $('#id_entrega').datepicker("option", "dateFormat", "dd/mm/yy");
             $('#id_entrega').datepicker("setDate", {{ formEquip.entrega.value }});
         });
-   </script> 
+   </script>
 {% endblock %}
 
 {% block right_of_nav %}
 
     <fieldset>
-        <legend> Agregar Equipos: </legend>
-        <form action='.' method='POST'> {% csrf_token %}  
+        <legend>
+            {% block title_2 %}{% endblock %}
+        </legend>
+        <form action='.' method='POST'> {% csrf_token %}
           <table>
             <tr>
-              <td> {{ formEquip.folio.errors }} <label for="id_folio"> Folio: </label> {{ formEquip.folio }}  </td>  
+              <td> {{ formEquip.folio.errors }} <label for="id_folio"> Folio: </label> {{ formEquip.folio }}  </td>
               <td> </td>
-              <td>           
+              <td>
                 <fieldset>
-                    <input type="text" name="folioQuery" value="{{ query|escape }}"  placeholder="Folio">
+                    <input type="text" name="folioQuery" value=""  placeholder="Folio">
                     <input type="submit" name="submitFolio" value="Buscar" class="btn-buscar">
                     <p class='error'> {{ error.search }} </p>
                 </fieldset>
               </td>
             <tr>
               <td> {{ formEquip.tipo.errors }} <label for="id_tipo"> Tipo: </label> {{ formEquip.tipo }} </td>
-              <td> {{ formEquip.marca.errors }} <label for='id_marca'> Marca: </label> {{ formEquip.marca }} </td>        
+              <td> {{ formEquip.marca.errors }} <label for='id_marca'> Marca: </label> {{ formEquip.marca }} </td>
               <td> {{ formEquip.modelo.errors }} <label for='id_modelo'> Modelo: </label> {{ formEquip.modelo }} </td>
             </tr>
             <tr>
               <td>{{ formEquip.cliente.errors }} <label for='id_cliente'> Cliente: </label> {{ formEquip.cliente }}</td>
               <td> {{ formEquip.estatus.errors }} <label for="id_estatus"> Estatus: </label> {{ formEquip.estatus }} </td>
-              <td> {{ formEquip.empleado.errors }} <label for="empleado"> Empleado: </label> {{ formEquip.empleado }} </td>   
+              <td> {{ formEquip.empleado.errors }} <label for="empleado"> Empleado: </label> {{ formEquip.empleado }} </td>
             </tr>
             <tr>
-              <td colspan="2" rowspan="2"> 
-                  {{ formEquip.servicios.errors }} <label for='id_servicios'> Servicios: </label> {{formEquip.servicios}} 
+              <td colspan="2" rowspan="2">
+                  {{ formEquip.servicios.errors }} <label for='id_servicios'> Servicios: </label> {{formEquip.servicios}}
               </td>
               <td> {{ formEquip.entrega.errors }} <label for='id_entrega'> Entrega: </label> {{ formEquip.entrega }} </td>
             </tr>
@@ -95,15 +97,8 @@
             </tr>
           </table>
 
-          <!-- guarda variables para poder volver s hacer la consulta de la informacóm 
-          que ya estaba desplegada en la página search-->
-          <div style="display:none;" >
-            <input type='text' name='page' value='{{ page }}'> 
-            <input type='text' name='queryDate1' value='{{ query.date1|escape }}'> 
-            <input type='text' name='queryDate2' value='{{ query.date2|escape }}'>
-            <input type='text' name='queryStatus' value='{{ query.status|escape }}'>
-          </div>
-        
+           {% block vars_hidden %}{% endblock %}
+
         </form>
     </fieldset>
 

@@ -6,10 +6,10 @@
 
 <head>
     <meta charset="utf-8" />
-    <title>{% block titulo %} {% endblock %}</title>
-    
+    <title>{% block title_1 %}{% endblock %}</title>
+
     <!-- Agregar el context_instance = RequestContext(request)  a la vista para obtener el STATIC_URL-->
-    <link rel='stylesheet' type='text/css' href="{% static 'css/normalize.css' %}"/>  
+    <link rel='stylesheet' type='text/css' href="{% static 'css/normalize.css' %}"/>
     <link rel='stylesheet' type='text/css' href="{% static 'mechatronics/css/base.css' %}"/>
     <link rel='stylesheet' type='text/css' href="{% static 'mechatronics/css/base_forms.css' %}"/>
     <link rel='stylesheet' type='text/css' href="{% static 'mechatronics/css/datepicker.css' %}"/>
@@ -20,7 +20,7 @@
     <script type="text/javascript" src="{% static 'mechatronics/js/datepicker.js' %}"></script>
     <script type="text/javascript" src="{% static 'mechatronics/js/popups.js' %}"></script>
 
-    {% block js_css %} {% endblock %}
+    {% block js_css %}{% endblock %}
 </head>
 
 <body>
@@ -31,9 +31,9 @@
             <div class='logo'>
                     <h1> Sistema Administrativo "MECHATRONICS HOUSE" </h1>
             </div>
-        </header> 
+        </header>
     </div>
-    
+
     <!-- Estilo para para el menu y el bloque que se encuentra a la deracha del mismo -->
     <div class='container'>
         <div class='wrapper'>
@@ -41,7 +41,7 @@
                 <ul>
                     <li> <a href='#'> Capturar </a>
                         <ul>
-                            <li> <a href='/administrative/equipment/add'> Equipos </a> </li>
+                            <li> <a href='/administrative/equip/add'> Equipos </a> </li>
                             <li> <a href='/administrative/client/search'> Clientes </a> </li>
                             <li> <a href='/administrative/empleados/search'> Empleados </a> </li>
                             <li> <a href='/administrative/pagos/search'> Pagos </a> </li>
@@ -49,7 +49,7 @@
                     </li>
                     <li> <a href='#'> Actualizar </a>
                         <ul>
-                            <li> <a href='/administrative/equipment/search'> Equipos </a> </li>
+                            <li> <a href='/administrative/equip/search'> Equipos </a> </li>
                             <li> <a href='/administrative/client/search'> Clientes </a> </li>
                             <li> <a href='/administrative/empleados/search'> Empleados </a> </li>
                             <li> <a href='/administrative/pagos/search'> Pagos </a> </li>
@@ -66,37 +66,37 @@
                             <li> <a id='popup_acercaDe'> Acerca de... </a> </li>
                         </ul>
                     </li>
-                    <li> <a href='#'> Salir </a> 
-                        <ul> 
+                    <li> <a href='#'> Salir </a>
+                        <ul>
                             <li> <a href='/administrative/salir'> Confirmar </a> </li>
                         </ul>
                     </li>
                 </ul>
-            </nav> 
-            
+            </nav>
+
             <!-- Estilo para el bloque del lado derecho de la pagina -->
-            <div class="right_of_nav">   
-            {% block right_of_nav %} {% endblock %} 
-            </div> 
+            <div class="right_of_nav">
+                {% block right_of_nav %}{% endblock %}
+            </div>
 
             <!-- Estilo para el bloque debajo de la pagina -->
-            {% block bottom_of_nav %} {% endblock %}  
+            {% block bottom_of_nav %}{% endblock %}
 
-        </div>          
+        </div>
     </div>
 
     <!-- Estilo para el pie de pagina -->
     <footer class="container">
-        <div class="bloque_footer">     <!-- css no definido --> 
+        <div class="bloque_footer">     <!-- css no definido -->
             <h6>
                 <br> Copyright © Software Nakom
-                <br> nakom@hotmail.com 
+                <br> nakom@hotmail.com
                 <br> <br>
             </h6>
         </div>
     </footer>
 
-{% block popup %} {% endblock %}
+{% block popup %}{% endblock %}
 
 </body>
 </html>

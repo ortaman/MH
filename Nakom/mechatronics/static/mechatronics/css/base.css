@@ -79,17 +79,17 @@ nav > ul > li > a {
     color: #eee;
     font-size: 0.95em;
     font-weight: bold;
-    
+
     border: 1px solid #1682ba;
         -webkit-border-radius: 0.3em 0.3em 0.3em 0.3em;
         -moz-border-radius: 0.3em 0.3em 0.3em 0.3em;
     border-radius: 0.3em 0.3em 0.3em 0.3em;
     box-shadow: inset 0 1px 0 rgba( 255, 255, 255, 0.15 );
-    
+
     margin-top: 5%;
     padding: 8% 2% 8% 20%;
     position: relative;
-    
+
     text-decoration: none;
     text-shadow: 0 1px 1px rgba( 0, 0, 0, 0.35 );
 }
@@ -98,11 +98,11 @@ nav > ul > li > a::after {
     content: '';
     display: block;
     height: 5px;
-    
+
     position: absolute;
     right: 20px;
     top: 12px;
-    
+
     border-top: 2px solid #eeeeee;
     border-left: 2px solid #eeeeee;
 
@@ -111,17 +111,17 @@ nav > ul > li > a::after {
     -ms-transform: rotate(-135deg);
     -o-transform: rotate(-135deg);
     transform: rotate(-135deg);
-    
+
     width: 5px;
 }
 
-nav > ul > li:first-child {               
+nav > ul > li:first-child {
     margin-top: -5%;
-} 
+}
 /*
 nav > ul > li:last-child a:after {
     display: none;
-} 
+}
 */
 nav > ul > li > a:hover {
     color: #e0e561;
@@ -152,7 +152,7 @@ nav ul ul li a {
     border-radius: 0.3em 0.3em 0.3em 0.3em;
 
     padding: 4% 0 4% 24%;
-    
+
     margin: 0.1em 0.1em ;
     text-decoration: none;
     text-shadow: none;

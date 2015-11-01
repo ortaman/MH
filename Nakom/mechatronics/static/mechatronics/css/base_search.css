@@ -3,15 +3,15 @@
 	width: 5.5em;
 }
 
-fieldset { 
-	margin: 1% 2%; 
-	padding: 2% 2%; 
+fieldset {
+	margin: 1% 2%;
+	padding: 2% 2%;
 	width:92% ;
 }
 
-legend { 
-	font-size:1.1em;  
-	font-weight:bold; 
+legend {
+	font-size:1.1em;
+	font-weight:bold;
 }
 /******************* Estilos para los fieldsets ******************/
 .por-fecha{
@@ -44,13 +44,13 @@ legend {
 .por-nombre select {
 	margin-bottom: 0.5em;
 	width: 52%;
-}	
+}
 
 /*******************  Estilo para los botones en la busqueda ***********************/
 input.btn-buscar,
 input.btn-cerrar {
 	margin-left: 5%;
-	height: 1.8em; 
+	height: 1.8em;
 	width: 6em;
 }
 /*******************  Estilo para la tablas en la busqueda ***********************/
@@ -58,7 +58,7 @@ input.btn-cerrar {
 	margin-left: 1em;
 }
 
-#tabla-search {	
+#tabla-search {
 	border:1px solid #aaa;
 	margin:0.5em auto;
 	padding:0px;
@@ -75,16 +75,16 @@ input.btn-cerrar {
 	padding: 0.5em 0em;
 }
 #tabla-search  thead tr:last-child{
-	background:-o-linear-gradient( bottom, #a1bed1 5%, #64A0F1 100% );	
+	background:-o-linear-gradient( bottom, #a1bed1 5%, #64A0F1 100% );
 	background:-webkit-gradient( linear, left top,left bottom, color-stop(0.05, #64A0F1), color-stop(1, #64A0F1) );
 	background:-moz-linear-gradient( center top, #ACD7E5 5%, #64A0F1 100% );
 	background: -o-linear-gradient( top, #a1bed1, #64A0F1 );
-	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr="#a1bed1", endColorstr="#6984ad" );	
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr="#a1bed1", endColorstr="#6984ad" );
 	background-color:#a1bed1;
 
 	border:1px solid #888;
 	border-width:1px 0px 1px 0px;
-	
+
 	color:#111;
 	font-family:Arial;
 	font-size:0.80em;
@@ -105,9 +105,9 @@ input.btn-cerrar {
 	padding:0.2em 0.5em;
 	text-align:center;
 }
-#tabla-search tbody tr:nth-child(odd) { 
-	background-color:#eee; 
+#tabla-search tbody tr:nth-child(odd) {
+	background-color:#eee;
 }
-#tabla-search tbody tr:nth-child(even) { 
-	background-color:#d7eaf2; 
+#tabla-search tbody tr:nth-child(even) {
+	background-color:#d7eaf2;
 }

@@ -1,0 +1,16 @@
+{% extends 'mechatronics/base_equip.html' %}
+
+
+{% block title_2 %} Editar Equipo {% endblock %}
+
+
+<!-- guarda variables para poder volver s hacer la consulta de la informacóm
+como estaba desplegada en la página search-->
+{% block vars_hidden %}
+  <div style="display:none;" >
+    <input type='text' name='page' value='{{ page }}'>
+    <input type='text' name='date1' value='{{ query.date1|escape }}'>
+    <input type='text' name='date2' value='{{ query.date2|escape }}'>
+    <input type='text' name='status' value='{{ query.status|escape }}'>
+  </div>
+{% endblock %}

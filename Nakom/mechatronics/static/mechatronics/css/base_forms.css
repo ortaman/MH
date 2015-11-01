@@ -1,54 +1,54 @@
 /*********************** estilos base para label, inputs, textarea, select ************************/
-   
+
 /* Estilo base */
 label {  /*border: 0.1em solid #4F7DA6; */
     display: inline-block;
     font-size: 0.86em;
-    font-weight: bold; 
+    font-weight: bold;
     text-align: right;
-    height: 1.2em; 
+    height: 1.2em;
     margin: 0.7em 0%;
-    padding: 0.25em 0em;    
+    padding: 0.25em 0em;
     width: 35%;
-} 
+}
 
 select,
 input[type='text'],
-input[type='number'], 
-input[type='submit'], 
+input[type='number'],
+input[type='submit'],
 input[type='password'] {
     background: lightblue;
         background: -webkit-gradient( linear, left top, left bottom, color-stop(0.5, #ACD7E5), color-stop(0.9, #97d7ff ));
         background: linear-gradient( to bottom, #ACD7E5 50%, #97d7ff 90% );
-    
+
     border: 0.1em solid #4F7DA6;
     border-radius: 0.2em;
         -moz-border-radius: 0.2em;
         -webkit-border-radius: 0.2em;
         -o-border-radius: 0.2em;
-    
+
     display: inline-block;
     font-size: 0.90em;
-    height: 1.2em; 
+    height: 1.2em;
     margin: 0.7em 0%;
     padding: 0.25em 0.5em;
-    /*text-transform: uppercase;*/ 
-    width: 45%; 
+    /*text-transform: uppercase;*/
+    width: 45%;
 }
 
 select,
-input[type='text']:focus, 
-input[type='number']:focus, 
-input[type='submit']:focus, 
+input[type='text']:focus,
+input[type='number']:focus,
+input[type='submit']:focus,
 input[type='password']:focus {
     background: #8BD0DA;
 }
 
-/* Fin estilo Base */  
+/* Fin estilo Base */
 
-input[type='submit'] {        
+input[type='submit'] {
     font-size: 0.95em;
-    height: 2em; 
+    height: 2em;
     margin: 0.5em 0em;
     padding: 0em;
 }
@@ -62,12 +62,12 @@ select{
     height: 2em;
     margin: 0.7em 0%;
     padding: 0.05em 0.25em;
-    width: 62%;  
+    width: 62%;
 }
-select option{        
+select option{
     font-size: 1em;
     height: 1.5em;
-    padding: 0.05em 0.5em;  
+    padding: 0.05em 0.5em;
 }
 
 /* Fin del estilo base */
@@ -84,7 +84,7 @@ ul.errorlist {           /* non field error list container */
     margin-bottom: 0em;
     padding: 0em 0em;
 }
-.helptext{               
+.helptext{
     color: #333;
     display: inline;
     font-size: 0.7em;
@@ -93,7 +93,7 @@ ul.errorlist {           /* non field error list container */
     text-align: center;
 }
 
-.error { 
+.error {
     color: red;
     font-size: 0.6em;
     margin: 0em;
