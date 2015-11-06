@@ -21,9 +21,22 @@ def equip_add(request):
         form_equip = FormEquipo()
 
     elif request.method == 'POST':
+        # search equip by folio
+        if 'submitFolio' in request.POST:
+            folio = request.POST.get('folioQuery')
 
-        # Add equip
-        if 'submitEquip' in request.POST:
+            if folio:
+                try:
+                    equip = Equipo.objects.get(folio=folio)
+                    form_equip = FormEquipo(instance=equip)
+                except Equipo.DoesNotExist:
+                    error['search'] = "Folio: %s dosen't exist" % folio
+                    form_equip = FormEquipo()
+            else:
+                form_equip = FormEquipo()
+
+        elif 'submitEquip' in request.POST:
+            # Add equip (if 'formEquip' in request.POST:)
             form_equip = FormEquipo(request.POST)
 
             if form_equip.is_valid():
@@ -31,22 +44,8 @@ def equip_add(request):
 
                 url = '/administrative/equip/add/'
                 return HttpResponseRedirect(url)
-
-        # search equip by folio
-        elif 'submitFolio' in request.POST:
-            folio = request.POST.get('folioQuery')
-
-            if folio:
-                try:
-                    equip = Equipo.objects.get(folio=folio)
-                    form_equip = FormEquipo(instance=equip)
-
-                except Equipo.DoesNotExist:
-                    error['search'] = "Folio: %s dosen't exist" % folio
-                    form_equip = FormEquipo()
-
             else:
-                form_equip = FormEquipo()
+                print 'EA: formulario no valido'
 
     template_name = 'mechatronics/equip_add.html'
     context = {'formEquip': form_equip, 'error': error}
@@ -107,7 +106,7 @@ def equip_edit(request, id_equip):
             url += '?page=%s&date1=%s&date2=%s&status=%s' % values
 
         else:
-            print 'Formulario no valido'
+            print 'ED: Formulario no válido'
             url = '.'
 
     return HttpResponseRedirect(url)

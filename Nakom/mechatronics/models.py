@@ -76,7 +76,7 @@ class Equipo(models.Model):
         ('diagnosticado', 'Diagnosticado'),
         ('reparado', 'Reparado'),
         ('entregado', 'Entregado'),
-        ('inreparable', 'Irreparable'),
+        ('irreparable', 'Irreparable'),
     )
     folio = models.CharField(max_length=6, unique=True, help_text='Número de Folio')
 
