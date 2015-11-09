@@ -40,7 +40,7 @@ def equip_add(request):
                 url = '/administrative/equip/add/'
                 return HttpResponseRedirect(url)
             else:
-                print 'EA: formulario no valido'
+                print 'EL formulario del equipo no es válido'
 
     template_name = 'mechatronics/equip_add.html'
     context = {'formEquip': form_equip, 'error': error}
@@ -77,11 +77,9 @@ def equip_edit(request, id_equip):
         equip = Equipo.objects.get(id=id_equip)
         form_equip = FormEquipo(instance=equip)
 
-        p = request.GET.get('page')
-        q = request.GET.dict()
-
-        context = {'formEquip': form_equip, 'query': q, 'page': p}
         template_name = 'mechatronics/equip_edit.html'
+        query_dict = request.GET.dict()
+        context = {'formEquip': form_equip, 'query': query_dict}
 
         return render(request, template_name, context)
 
@@ -93,15 +91,13 @@ def equip_edit(request, id_equip):
         if form_equip.is_valid():
             form_equip.save()
 
-            p = request.POST.get('page')
-            q = request.POST.dict()
-
-            values = (p, q['date1'], q['date2'], q['status'])
+            query_data = request.POST.dict()
+            values = (query_data['page'], query_data['name'])
             url = '/administrative/equip/search/'
-            url += '?page=%s&date1=%s&date2=%s&status=%s' % values
+            url += '?page=%s&name=%s' % values
 
         else:
-            print 'ED: Formulario no válido'
+            print 'El formulario del cliente no ha sido válido'
             url = '.'
 
     return HttpResponseRedirect(url)

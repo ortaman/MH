@@ -69,8 +69,8 @@
                         {% for equip in equipList %}
                             <tr>
                                 <td>
-                                    <input type="checkbox" name="delete" value='{{equip.id|escape}}'>
-                                    <a href='/administrative/equip/edit/{{equip.id|escape}}/?page={{ equipList.number|escape }}&date1={{ query.date1|escape }}&date2={{ query.date2|escape }}&status={{ query.status }}'>
+                                    <input type="checkbox" name="delete" value='{{ equip.id|escape }}'>
+                                    <a href='/administrative/equip/edit/{{ equip.id|escape }}/?page={{ equipList.number|escape }}&date1={{ query.date1|escape }}&date2={{ query.date2|escape }}&status={{ query.status }}'>
                                         <img class ='icon' src="{% static 'mechatronics/img/modify.png' %}"
                                              height=13px width=13px >
                                     </a>

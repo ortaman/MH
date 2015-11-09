@@ -6,7 +6,7 @@ from django.test.utils import setup_test_environment
 
 from mechatronics.models import Equipo
 
-# needed to see response contex
+# needed to see response context
 setup_test_environment()
 
 
