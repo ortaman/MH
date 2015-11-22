@@ -1,0 +1,12 @@
+{% extends 'mechatronics/base_employee.html' %}
+
+{% block title_2 %} Editar Empleado: {% endblock %}
+
+{% block vars_hidden %}
+	<!-- guarda variables de consulta, para poder desplegar buscar y mostrar la lista en la pagina search, para así volver  mostrar la lista donde se encuentra el cliente borrado. -->
+	<div style="display:none">
+  		<input type='text' name='page' value='{{ query.page|escape  }}'>
+  		<input type='text' name='name' value='{{ query.name|escape }}'>
+  		<input type='text' name='status' value='{{ query.status|escape }}'>
+  	</div>
+{% endblock %}

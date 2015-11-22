@@ -24,14 +24,14 @@
 {% block right_of_nav %}
 
 	<form action='.' method='POST'> {% csrf_token %}
-	 	<fieldset>
-		  	<legend>
-			    {% block title_2 %}{% endblock %}
+		<fieldset>
+			<legend>
+				{% block title_2 %}{% endblock %}
 			</legend>
 			<table>
-				{{ formClient.as_table }}
+				{{ formEmployee.as_table }}
 			</table>
-			<input type='submit' value='Guardar'/>
+			<input type='submit' value='guardar'/>
 		</fieldset>
 
 		{% block vars_hidden %}{% endblock %}

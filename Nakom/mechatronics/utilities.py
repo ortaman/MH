@@ -1,8 +1,10 @@
 
 from datetime import datetime
+
+from django.db.models import Q
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
-from mechatronics.models import Equipo
+from mechatronics.models import Equipo, Empleado
 
 
 def pagination(objects_list, page, objects_per_page=10):
@@ -39,3 +41,25 @@ def database_search(date_start, date_end, status):
         equip_list = []
 
     return equip_list
+
+
+def employee_search(qdict):
+    name = qdict.get('name')
+    status = qdict.get('status')
+
+    if name == 'all':
+        employee_list = Empleado.objects.all()
+
+    elif name and not status:
+        query = Q(nombre__icontains=name) | Q(apellido__icontains=name)
+        employee_list = Empleado.objects.filter(query)
+
+    elif not name and status:
+        employee_list = Empleado.objects.filter(estado=status)
+
+    else:
+        query = Q(nombre__icontains=name) | Q(apellido__icontains=name)
+        query = query & Q(estado=status)
+        employee_list = Empleado.objects.filter(query)
+
+    return employee_list

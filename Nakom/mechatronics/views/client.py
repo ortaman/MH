@@ -46,14 +46,6 @@ def search(request):
 
         client_list = pagination(client_list, qdict, per_page)
 
-    # to dele the clientes by ids
-    elif request.method == 'POST':
-        ids_delete = request.POST.dict()
-
-        for id_client in ids_delete:
-            client = Cliente.objects.get(id=id_client)
-            client.delete()
-
     template_name = 'mechatronics/client_search.html'
     context = {'clientList': client_list, 'query': qdict}
 
