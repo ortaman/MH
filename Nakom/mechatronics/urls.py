@@ -3,7 +3,7 @@ from django.conf.urls import url
 
 from mechatronics.views.login import index
 from mechatronics.views.equip import equip_add, equip_search, equip_edit, equip_delete
-from mechatronics.views import client, employee
+from mechatronics.views import client, employee, payment
 
 urlpatterns = [
     # url(r'^administrativo/$', views.login, name='login'),
@@ -23,4 +23,10 @@ urlpatterns = [
     url(r'^administrative/employee/search/$', employee.search, name='search_employee'),
     url(r'^administrative/employee/edit/(?P<id_employee>.*)/$', employee.edit, name='edit_employee'),
     url(r'^administrative/employee/delete/$', employee.delete, name='delete_employee'),
+
+    url(r'^administrative/payment/add/$', payment.add, name='payment-add'),
+    url(r'^administrative/payment/search/$', payment.search, name='payment-search'),
+    url(r'^administrative/payment/edit/(?P<id_payment>.*)/$', payment.edit, name='payment-edit'),
+    url(r'^administrative/payment/delete/$', payment.delete, name='payment-delete'),
 ]
+

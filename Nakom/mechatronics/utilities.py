@@ -4,7 +4,7 @@ from datetime import datetime
 from django.db.models import Q
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
-from mechatronics.models import Equipo, Empleado
+from mechatronics.models import Equipo, Empleado, Pago
 
 
 def pagination(objects_list, page, objects_per_page=10):
@@ -63,3 +63,20 @@ def employee_search(qdict):
         employee_list = Empleado.objects.filter(query)
 
     return employee_list
+
+
+def payment_search(qdict):
+    date1 = qdict.get('date1')
+    date2 = qdict.get('date2')
+
+    # search by date range
+    if date1 and date2:
+        date1 = datetime.strptime(date1, '%d/%m/%Y').strftime('%Y-%m-%d')
+        date2 = datetime.strptime(date2, '%d/%m/%Y').strftime('%Y-%m-%d')
+
+        payment_list = Pago.objects.filter(fecha_de_pago__range=(date1, date2))
+
+    else:
+        payment_list = []
+
+    return payment_list
