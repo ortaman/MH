@@ -1,0 +1,5 @@
+django==1.8.5
+pyyaml==3.11
+ipython==4.0.0
+psycopg2==2.6
+Pillow==2.7.0

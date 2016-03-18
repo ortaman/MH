@@ -1,4 +1,0 @@
-django==1.8.5
-pyyaml==3.11
-ipython==4.0.0
-coverage==4.0.1

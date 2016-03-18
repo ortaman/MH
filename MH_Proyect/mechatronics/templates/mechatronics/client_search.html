@@ -1,0 +1,105 @@
+
+{% extends 'mechatronics/base.html' %}
+{% load staticfiles %}
+
+{% block title_1 %} Administración {% endblock %}
+
+{% block js_css %}
+    <link rel='stylesheet' type='text/css' href="{% static 'mechatronics/css/base_search.css' %}"/>
+{% endblock %}
+
+{% block right_of_nav %}
+    <fieldset>
+        <legend> Búsqueda de Clientes </legend>
+
+        <form action='.' method="GET">
+            <fieldset class='por-nombre'>
+                <legend> <h6> Por nombre o apellido: </h6> </legend>
+                <input type='text' name='name' value='{{ q.name }}'>
+
+                <input type='submit' name='submitSearch' value='Buscar' class='btn-buscar'>
+            </fieldset>
+        </form>
+
+        {% if q.name or q.month %}
+        {% if clientList %}
+            <table id='tabla-search'>
+                <thead>
+                    <tr>
+                        <th colspan ='9'>
+                            {% if q.name %} Resultados para "{{ q.name }}" {% endif %}
+                            {% if q.month %} Clientes registrados en el "actual mes" {% endif %}
+                        </th>
+                    </tr>
+                    <tr>
+                        <th>
+                            <a id='js_popup' href='#'>
+                                <img src="{% static 'mechatronics/img/delete.png' %}" height=13px width=13px >
+                            </a>
+                            <img class ='icon' src="{% static 'mechatronics/img/modify.png' %}" height=13px width=13px >
+                        </th>
+                        <th>Registró</th> <th>Nombre</th> <th>Apellidos</th> <th>Teléfono</th> <th>Email </th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <form action='../delete/' method="POST"> {% csrf_token %}
+                        {% for client in clientList %}
+                            <tr>
+                                <td>
+                                    <input type="checkbox" name="delete" value='{{ client.id }}'>
+                                    <a href='/administrative/client/edit/{{ client.id }}/?page={{ equipList.number }}&name={{ q.name }}&month={{ q.month }}'>
+                                        <img class ='icon' src="{% static 'mechatronics/img/modify.png' %}"
+                                             height=13px width=13px >
+                                    </a>
+                                </td>
+                                <td> {{ client.registro }}  </td>
+                                <td> {{ client.nombre }}  </td>
+                                <td> {{ client.apellido }} </td>
+                                <td> {{ client.telefono }} </td>
+                                <td> {{ client.email }} </td>
+                            </tr>
+                        {% endfor %}
+
+                        <!-- pop up para confirmacion de eliminacion de elementos -->
+                        <div class="overlay-container1">
+                            <div class="window-container1">
+                                <fieldset>
+                                    <legend> Se eliminarán los registros seleccionados </legend>
+                                    <input type='submit' class="btn-buscar" name ='submitDelete' value='Confirmar'/>
+                                    <span class="close"> Cancelar </span>
+                                </fieldset>
+                            </div>
+                            <!-- Guarda variables de consulta para desplegar la página con los elementos de la búsqueda en la que se encontraba el elemento eliminado. -->
+                            <div style="display:none;">
+                                <input type='text' name='page' value='{{ q.page }}'>
+                                <input type='text' name='name' value='{{ q.name }}'>
+                                <input type='text' name='month' value='{{ q.month }}'>
+                            </div>
+                        </div>
+                        <!-- End de popup -->
+                    </form>
+                </tbody>
+            </table>
+
+            <div class="pagination">
+                <span class="step-links">
+                    {% if clientList.has_previous %}
+                        <a href="?page={{ clientList.previous_page_number }}&name={{ q.name }}"> <h6> previous </h6> </a>
+                    {% endif %}
+
+                    <span class="current">
+                        <h6> Page {{ clientList.number }} of {{ clientList.paginator.num_pages }} </h6>
+                    </span>
+
+                    {% if clientList.has_next %}
+                        <a href="?page={{ clientList.next_page_number }}&name={{ q.name }}"> <h6> next </h6> </a>
+                    {% endif %}
+                </span>
+            </div>
+        {% else %}
+            <p> No hay resultado en la busqueda </p>
+        {% endif %}
+        {% endif %}
+    </fieldset>
+{% endblock %}

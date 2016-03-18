@@ -1,0 +1,135 @@
+
+{% extends 'mechatronics/base.html' %}
+{% load staticfiles %}
+
+{% block title_1 %} Administración {% endblock %}
+
+{% block js_css %}
+    <link rel='stylesheet' type='text/css' href="{% static 'mechatronics/css/base_search.css' %}"/>
+    <style>
+        fieldset .buscar {
+            display: inline-block;
+            margin-left: 0;
+            vertical-align: top;
+            width: 18%;
+        }
+        fieldset input.btn-search {
+            height: 1.8em;
+            margin: 0;
+            margin-left: 5%;
+            padding: 0;
+            width: 90%;
+        }
+    </style>
+
+    <script>
+        $(function() {
+            $( '#datepicker-1, #datepicker-2' ).datepicker();
+            $( '#datepicker-1, #datepicker-2' ).datepicker( "option", "showAnim", 'show' );
+            $( '#datepicker-1, #datepicker-2' ).datepicker( "option", "dateFormat", "dd/mm/yy" );
+            $( '#datepicker-1' ).datepicker( "setDate", '{{ q.date1 }}' );
+            $( '#datepicker-2' ).datepicker( "setDate", '{{ q.date2 }}' );
+        });
+   </script>
+{% endblock %}
+
+{% block right_of_nav %}
+    <fieldset>
+        <legend> Búsqueda de Pagos </legend>
+
+        <form action='.' method="GET">
+            <fieldset class='por-fecha'>
+                <legend> <h6> Por ingreso: </h6> </legend>
+                <label> <h5> Fecha Inicial: </h5> </label>
+                <input id='datepicker-1' type='text' name='date1' value=''>
+                <label> <h5> Fecha Final: </h5> </label>
+                <input id='datepicker-2' type='text' name='date2' value=''>
+            </fieldset>
+            <fieldset class='buscar'>
+                <input class='btn-search' type='submit' name='submitSearch' value='Buscar'>
+            </fieldset>
+        </form>
+
+        {% if q.date1 and q.date2 %}
+        {% if paymentList %}
+            <table id='tabla-search'>
+                <thead>
+                    <tr>
+                        <th colspan ='9'>
+                            Resultados por fecha del "{{ q.date1 }}" al "{{ q.date2 }}"
+                        </th>
+                    </tr>
+                    <tr>
+                        <th>
+                            <a id='js_popup' href='#'>
+                                <img src="{% static 'mechatronics/img/delete.png' %}" height=13px width=13px >
+                            </a>
+                            <img class ='icon' src="{% static 'mechatronics/img/modify.png' %}" height=13px width=13px >
+                        </th>
+                        <th>Fecha de Pago</th> <th>Servicio</th> <th>Monto</th> <th></th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <form action='../delete/' method="POST"> {% csrf_token %}
+                        {% for payment in paymentList %}
+                            <tr>
+                                <td>
+                                    <input type="checkbox" name="delete" value='{{ payment.id }}'>
+                                    <a href='/administrative/payment/edit/{{ payment.id }}/?page={{ paymentList.number }}&date1={{ q.date1 }}&date2={{ q.date2 }}'>
+                                    <img class ='icon' src="{% static 'mechatronics/img/modify.png' %}"
+                                        height=13px width=13px >
+                                    </a>
+                                </td>
+                                <td> {{ payment.fecha_de_pago }}  </td>
+                                <td> {{ payment.servicio }}  </td>
+                                <td> {{ payment.monto }}  </td>
+                            </tr>
+                        {% endfor %}
+
+                        <!-- pop up para confirmacion de eliminación de elementos -->
+                        <div class="overlay-container1">
+                            <div class="window-container1">
+                                    <fieldset>
+                                        <legend> Se eliminarán los registros seleccionados </legend>
+                                        <input type='submit' class="btn-buscar" name ='submitDelete' value='Confirmar'/>
+                                        <span class="close"> Cancelar </span>
+                                    </fieldset>
+                            </div>
+                            <!-- Guarda variables de consulta para desplegar la página con los elementos de la búsqueda en la que se encontraba el elemento eliminado. -->
+                            <div style="display:none">
+                                <input type='text' name='page' value='{{ paymentList.number }}'>
+                                <input type='text' name='date1' value='{{ q.date1 }}'>
+                                <input type='text' name='date2' value='{{ q.date2 }}'>
+                            </div>
+                        </div>
+                        <!-- End de popup -->
+                    </form>
+                </tbody>
+            </table>
+
+            <div class="pagination">
+                <span class="step-links">
+                    {% if paymentList.has_previous %}
+                        <a href="?page={{ paymentList.previous_page_number }}&date1={{ q.date1 }}&date2={{ q.date2 }}">
+                            <h6> previous </h6>
+                        </a>
+                    {% endif %}
+
+                    <span class="current">
+                        <h6> Page {{ paymentList.number }} of {{ paymentList.paginator.num_pages }} </h6>
+                    </span>
+
+                    {% if paymentList.has_next %}
+                        <a href="?page={{ paymentList.next_page_number }}&date1={{ q.date1 }}&date2={{ q.date2 }}">
+                            <h6> next </h6>
+                        </a>
+                    {% endif %}
+                </span>
+            </div>
+        {% else %}
+            <p> No hay resultado en la búsqueda </p>
+        {% endif %}
+        {% endif %}
+    </fieldset>
+{% endblock %}

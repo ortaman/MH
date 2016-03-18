@@ -1,0 +1,13 @@
+
+{% extends 'mechatronics/base_client.html' %}
+
+{% block title_2 %} Editar Cliente {% endblock %}
+
+{% block vars_hidden %}
+    <!-- Guarda variables de consulta para desplegar la página con los elementos de la búsqueda en la que se encuentra el elemento moficado. -->
+    <div style="display:none;">
+        <input type='text' name='page' value='{{ q.page }}'>
+        <input type='text' name='name' value='{{ q.name }}'>
+        <input type='text' name='month' value='{{ q.month }}'>
+    </div>
+{% endblock %}

@@ -1,0 +1,124 @@
+
+{% extends 'mechatronics/base.html' %}
+{% load staticfiles %}
+
+{% block title_1 %} Administración {% endblock %}
+
+{% block js_css %}
+    <link rel='stylesheet' type='text/css' href="{% static 'mechatronics/css/base_search.css' %}"/>
+{% endblock %}
+
+{% block right_of_nav %}
+    <fieldset>
+        <legend> Búsqueda de Empleados </legend>
+
+        <form action='.' method="GET">
+            <fieldset class='por-nombre'>
+                <legend> <h6> Por nombre o apellido: </h6> </legend>
+                <input type='text' name='name' value='{{ q.name }}'>
+
+                <input type='submit' name='submitSearch' value='Buscar' class='btn-buscar'>
+            </fieldset>
+
+            <fieldset class='por-estatus'>
+                <legend> <h6> Por Estatus: </h6> </legend>
+                <select name='status' >
+                    <option value=""> Null </option>
+                    <option value="activo"> Activo </option>
+                    <option value="inactivo"> Inactivo </option>
+                </select>
+
+                <input type='submit' name='submitSearch' value='Buscar' class='btn-buscar'>
+            </fieldset>
+        </form>
+
+        {% if q.name or q.status %}
+        {% if employeeList %}
+            <table id='tabla-search'>
+                <thead>
+                    <tr>
+                        <th colspan ='9'>
+                            {% if q.name %}
+                                Resultados por nombre del empleado: "{{ q.name }}"
+                            {% elif q.status  %}
+                                Resultados por nombre del empleado: "{{ q.status }}"
+                            {% else %}
+                                Todos los empleados
+                            {% endif %}
+                        </th>
+                    </tr>
+                    <tr>
+                        <th>
+                            <a id='js_popup' href='#'>
+                                <img src="{% static 'mechatronics/img/delete.png' %}" height=13px width=13px >
+                            </a>
+                            <img class ='icon' src="{% static 'mechatronics/img/modify.png' %}" height=13px width=13px >
+                        </th>
+                        <th>Registro </th> <th>nombres</th> <th>Apellidos   </th> <th>Teléfono</th>
+                        <th>Email    </th> <th>Estado </th> <th>Salario Base</th> <th>Comisión</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <form action='../delete/' method="POST">    {% csrf_token %}
+                        {% for employee in employeeList %}
+                            <tr>
+                                <td>
+                                    <input type="checkbox" name="delete" value='{{ employee.id }}'>
+                                    <a href='/administrative/employee/edit/{{ employee.id }}/?page={{ employeeList.number }}&name={{ q.name }}&status={{ q.status }}'>
+                                        <img class ='icon' src="{% static 'mechatronics/img/modify.png' %}" height=13px width=13px >
+                                    </a>
+                                </td>
+                                <td> {{ employee.registro }}  </td>
+                                <td> {{ employee.nombre }}  </td>
+                                <td> {{ employee.apellido }}   </td>
+                                <td> {{ employee.telefono }} </td>
+                                <td> {{ employee.email }} </td>
+                                <td> {{ employee.estado }} </td>
+                                <td> {{ employee.salario_base }} </td>
+                                <td> {{ employee.comision }} </td>
+                            </tr>
+                        {% endfor %}s
+
+                        <!-- pop up para confirmacion de eliminacion de elementos -->
+                        <div class="overlay-container1">
+                            <div class="window-container1">
+                                <fieldset>
+                                    <legend> Se eliminarán los registros seleccionados </legend>
+                                    <input type='submit' class="btn-buscar" name ='submitDelete' value='Confirmar'/>
+                                    <span class="close"> Cancelar </span>
+                                </fieldset>
+                            </div>
+                            <!-- Guarda variables de consulta para desplegar la página con los elementos de la búsqueda en la que se encontraba el elemento eliminado. -->
+                            <div style="display:none;" >
+                                <input type='text' name='page' value='{{ employeeList.number }}'>
+                                <input type='text' name='name' value='{{ q.name }}'>
+                                <input type='text' name='status' value='{{ q.status }}'>
+                            </div>
+                        </div>
+                        <!-- End de popup -->
+                    </form>
+                </tbody>
+            </table>
+
+            <div class="pagination">
+                <span class="step-links">
+                    {% if employeeList.has_previous %}
+                        <a href="?page={{ employeeList.previous_page_number }}&name={{ q.name }}"> <h6> previous </h6> </a>
+                    {% endif %}
+
+                    <span class="current">
+                        <h6> Page {{ employeeList.number }} of {{ employeeList.paginator.num_pages }} </h6>
+                    </span>
+
+                    {% if employeeList.has_next %}
+                        <a href="?page={{ employeeList.next_page_number }}&name={{ q.name }}"> <h6> next </h6> </a>
+                    {% endif %}
+                </span>
+            </div>
+        {% else %}
+            <p> No hay resultado en la búsqueda </p>
+        {% endif %}
+        {% endif %}
+    </fieldset>
+{% endblock %}
